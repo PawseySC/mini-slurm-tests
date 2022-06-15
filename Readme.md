@@ -4,6 +4,11 @@ Minimal set of *Slurm* tests showing how to use *Python*'s *subprocess* module t
 
 No proper error checking performed.
 
+Tested only on:
+```shell
+Python 3.10.5 (main, Jun 15 2022, 09:28:28) [GCC 11.2.0 20210728 (Cray Inc.)]
+```
+
 
 ### Run tests
 ```python
