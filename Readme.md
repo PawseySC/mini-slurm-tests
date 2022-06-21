@@ -1,14 +1,20 @@
 # Slurm tests
 
-Minimal set of *Slurm* tests showing how to use *Python*'s *subprocess* module to interact with *Slurm*.
+Minimal set of *Slurm* tests showing how to use *Python*'s' and *Rust*'s' *subprocess* module to interact with *Slurm*.
 
-No proper error checking performed.
+Since it's required for the code to compile, *Rust*'s code includes proper error handling while the Python code does not.
 
-Tested only on:
+All *Rust* executables are statically linked. To achieve full portability across systems without recompiling use the `x86_64-unknown-linux-musl` target.
+
+The *Rust* tests can be run concurrently using *Cargo*'s built-in test runner (`cargo test`).
+
+Tested only with:
 ```shell
 Python 3.10.5 (main, Jun 15 2022, 09:28:28) [GCC 11.2.0 20210728 (Cray Inc.)]
+Rust 1.61
 ```
 
+## Python code
 
 ### Run tests
 ```python
@@ -40,8 +46,6 @@ if len(out[0]) == 0:
 else:
     print('FAIL')
 ```
-###
-
 
 ### Check QoS
 ```python
