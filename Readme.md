@@ -10,4 +10,4 @@ No proper error checking performed in the *Python* tests.
 
 [Pyton](./python)
 
-[Rust](./rust)
+[Rust](./rust/slurm-test)
