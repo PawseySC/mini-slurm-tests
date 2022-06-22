@@ -1,9 +1,8 @@
 use subprocess::{Popen, PopenConfig, Redirection, Result};
-/// Verify that quality of service is supported by checking
-/// that the `sacctmgr` output contains more than just the two header rows.
+/// Just verify that it is possible to request an allocation.
 fn main() -> Result<()> {
     let mut p = Popen::create(
-        &["sacctmgr", "show", "qos"],
+        &["salloc", "--mem", "1GB", "echo", "ok"],
         PopenConfig {
             stdout: Redirection::Pipe,
             stderr: Redirection::Pipe,
@@ -12,24 +11,19 @@ fn main() -> Result<()> {
     )?;
     let (out, err) = p.communicate(None)?;
     if let Some(e) = err {
-        if !e.is_empty() {
-            eprintln!("ERROR: {}", e);
+        if !e.trim().to_lowercase().contains("granted job allocation") {
+            println!("FAIL");
             std::process::exit(1);
         }
     }
-    if let Some(c) = out {
-        let numrows = c
-            .split('\n')
-            .skip(2)
-            .filter(|line| !line.is_empty())
-            .count();
-        if numrows > 0 {
+    if let Some(r) = out {
+        if r == "ok\n" {
             println!("PASS");
         } else {
             println!("FAIL");
         }
     } else {
-        eprintln!("ERROR");
+        eprintln!("FAIL");
     }
     Ok(())
 }

@@ -1,5 +1,4 @@
 use subprocess::{Popen, PopenConfig, Redirection, Result};
-/// Testing `subprocess` module by issuing `ps x` command and parsing the result.
 fn main() -> Result<()> {
     let mut p = Popen::create(
         &["ps", "x"],

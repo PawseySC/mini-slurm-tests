@@ -1,6 +1,6 @@
 use subprocess::{Popen, PopenConfig, Redirection, Result};
 /// Verify that quality of service is supported by checking
-/// that the `sacctmgr` output contains more than just the two header rows.
+/// that the output contains more than the two header rows.
 fn main() -> Result<()> {
     let mut p = Popen::create(
         &["sacctmgr", "show", "qos"],
